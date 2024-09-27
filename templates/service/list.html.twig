@@ -1,0 +1,31 @@
+{%if authors is empty%}
+<h1>table is empty</h1>
+{%endif%}
+{%if authors is null%}
+<h1>table is null</h1>
+{%endif%}
+<table border=1>
+<tr>
+<th>id</th>
+<th>picture</th>
+<th>username</th>
+<th>email</th>
+<th>nb_books</th>
+</tr>
+
+
+
+{%for author in authors%}
+<tr>
+   <td>{{author.id}}</td> 
+   <td><img src="{{author.picture}}"> </td>
+   <td>{{author.username|upper()}}</td> 
+   <td>{{author.email}}</td> 
+   <td>{{author.nb_books}}</td> 
+  
+   <td><a href="{{ path('auther', {'id': author.id}) }}">details</a></td>
+    <br>
+    </tr>
+{%endfor%}</table>
+
+<h1>le nombre de author est :{{authors|length()}}</h1>

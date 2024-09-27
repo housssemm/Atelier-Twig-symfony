@@ -1,0 +1,16 @@
+{% set break = false %}
+{% for author in authors %}
+  {% if author.id == id %}
+    <table>
+      <tr>
+        <td>{{ author.id }}</td>
+        <td><img src="{{ asset(author.picture) }}"></td>
+        <td>{{ author.username|upper }}</td>
+        <td>{{ author.email }}</td>
+        <td>{{ author.nb_books }}</td>
+      </tr>
+    </table>
+     {% set break = true %}
+  
+  {% endif %}
+{% endfor %}
