@@ -5,7 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
+use App\Repository\AuthorRepository;
+use Doctrine\ORM\EntityManagerInterface;
 class AuthorController extends AbstractController
 {
     #[Route('/author', name: 'app_author')]
@@ -45,4 +46,15 @@ public function authorDetails($id):Response{
             
 
 }
+#[Route('/afficher',name:'app_afficher')]
+public function affiche(AuthorRepository $repoAuthor):Response{
+    $list=$repoAuthor->findAll();
+    return $this->render('author/read.html.twig',['authors'=>$list]);
 }
+#[route('/delete{id}',name:'app_delete')]
+public function delete(AuthorRepository $repoAuthor,int $id,EntityManagerInterface $entityManager):Response{
+    $auth=$repoAuthor->find($id);
+    $entityManager->remove($auth);
+     $entityManager->flush();
+    return $this->redirectToRoute('app_afficher');
+}}

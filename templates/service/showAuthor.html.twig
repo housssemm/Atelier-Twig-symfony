@@ -1,4 +1,4 @@
-{% set break = false %}
+
 {% for author in authors %}
   {% if author.id == id %}
     <table>
@@ -10,7 +10,7 @@
         <td>{{ author.nb_books }}</td>
       </tr>
     </table>
-     {% set break = true %}
+ 
   
   {% endif %}
 {% endfor %}

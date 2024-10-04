@@ -14,8 +14,13 @@
 </tr>
 
 
-
+{%set nb_book=0%}
 {%for author in authors%}
+
+
+
+{%set nb_book =nb_book+author.nb_books%}
+
 <tr>
    <td>{{author.id}}</td> 
    <td><img src="{{author.picture}}"> </td>
@@ -27,5 +32,5 @@
     <br>
     </tr>
 {%endfor%}</table>
-
+<h1>le nombre de livre est :{{nb_book}}</h1>
 <h1>le nombre de author est :{{authors|length()}}</h1>
