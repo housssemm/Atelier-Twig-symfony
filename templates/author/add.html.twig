@@ -1,0 +1,32 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+		<title>add</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div
+					class="col-md-6">
+					<!-- Adjust width using col-md-* classes -->
+					<h2 class="text-center mt-5">Add</h2>
+					{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+					{{ form_row(form.username, {'attr': {'class': 'form-control'}}) }}
+					{{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+
+					<button type="submit" class="btn btn-success btn-block mt-3">Submit</button>
+
+
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+
+
+	</body>
+</html>

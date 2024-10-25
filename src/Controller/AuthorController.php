@@ -7,6 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Author;
+use App\Form\AuthorType;
+use Symfony\Component\HttpFoundation\Request;
+
 class AuthorController extends AbstractController
 {
     #[Route('/author', name: 'app_author')]
@@ -57,4 +62,53 @@ public function delete(AuthorRepository $repoAuthor,int $id,EntityManagerInterfa
     $entityManager->remove($auth);
      $entityManager->flush();
     return $this->redirectToRoute('app_afficher');
-}}
+}
+
+// #[Route('/Add',name:'author_add')]
+//     public function ajouter(ManagerRegistry $doctrine):response
+//     {
+//         $author=new Author(); //nouveau objet author
+//         $author->setUsername("m"); // remplir attribut usename
+//         $author->setEmail("m@esprit.tn");// remplir attribut email
+//         $em=$doctrine->getManager(); // appel entity manager
+//         $em->persist($author); // insert into
+//         $em->flush();// d'envoyer tout ce qui a été persisté avant à la base de données
+//         return $this->redirectToRoute('app_afficher');
+//     }
+
+
+#[Route('/Add',name:'author_add')]
+    public function ajouter(ManagerRegistry $doctrine, Request $request):response
+    {
+        $author=new Author();
+       
+        $form = $this->createForm(AuthorType::class, $author);
+          $form->handleRequest($request);
+          if ($form->isSubmitted() && $form->isValid()) {
+            
+          
+        $em=$doctrine->getManager(); 
+        $em->persist($author); 
+        $em->flush();
+        return $this->redirectToRoute('app_afficher');
+        }
+             return $this->render('author/add.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+        #[Route('/Update/{id}',name:'book_update')]
+    public function update(ManagerRegistry $doctrine,Request $request,$id,AuthorRepository $repoAuthor):response
+    {
+        $author=$repoAuthor->find($id);
+        $form=$this->createForm(AuthorType::class,$author);
+        $form->handleRequest($request);
+       if ($form->isSubmitted() )
+       {
+        $em=$doctrine->getManager(); 
+        $em->flush();
+        return $this->redirectToRoute('app_afficher');
+    }
+    return $this->render('author/update.html.twig',['form'=>$form->createView()]) ;
+    
+    }
+}

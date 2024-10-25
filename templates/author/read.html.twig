@@ -1,27 +1,35 @@
-<table border=1>
-<tr>
-<th>id</th>
-<th>username</th>
-<th>email</th>
-<th>action</th>
-</tr>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+		<title>Document</title>
+	</head>
+	<body>
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID</th>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for author in authors %}
+					<tr>
+						<td>{{ author.id }}</td>
+						<td>{{ author.username }}</td>
+						<td>{{ author.email }}</td>
+						<td>
+							<a href="{{ path('app_delete', { 'id': author.id }) }}" class="link-opacity-25-hover">Supprimer</a>
 
 
-{%for author in authors%}
-
-
-
-
-<tr>
-   <td>{{author.id}}</td> 
-
-   <td>{{author.username|upper()}}</td> 
-   <td>{{author.email}}</td> 
-   
-  
-   <td><a href="{{ path('app_delete', { 'id': author.id }) }}">Supprimer</a></td>        
-    <br>
-    </tr>
-    
-{%endfor%}</table>
-
+							<a href="{{ path('author_update', {'id': author.id}) }}">update</a>
+						</td>
+					</tr>
+				</td>
+			</tbody>
+		</tr>
+	{% endfor %}
+</html></tbody></table><a href="{{ path('author_add') }}" class="btn btn-primary">Ajouter</a></body></html>
