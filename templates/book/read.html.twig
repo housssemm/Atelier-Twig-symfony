@@ -7,6 +7,15 @@
 		<title>Document</title>
 	</head>
 	<body>
+<form action="{{path("rechercheByID")}}" method="Post">
+	<label>recherche by id</label>
+	<input type="text" name="id">
+	
+	<input type="submit" value="recherche">
+
+
+</form>
+
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
@@ -28,8 +37,8 @@
 
 						<td>{{ book.publicationDate|date('d/m/Y') }}</td>
 						{%if book.enabled ==false%}
-						<td>0</td>
-						{%else%}
+							<td>0</td>
+							{%else%}
 							<td>{{ book.enabled }}</td>
 							{%endif%}
 							<td>{{ book.category }}</td>
@@ -51,4 +60,5 @@
 			</tbody>
 		</tr>
 	{% endfor %}
-</html></tbody></table><a href="{{ path('book_add') }}" class="btn btn-primary">Ajouter</a></body></html>
+	{# </html></tbody></table><a href="{{ path('book_add') }}" class="btn btn-primary">Ajouter</a></body></html><a href="{{path('trier')}}" class="btn btn-primary">trier</a><h1>le nombre de livres de type Science-Fiction est :{{nb}}</h1> #}
+</html>

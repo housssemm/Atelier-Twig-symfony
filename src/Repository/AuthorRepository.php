@@ -15,6 +15,24 @@ class AuthorRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Author::class);
     }
+    public function minMax($min,$max)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery("Select a from App\Entity\Author a where a.nb_books between :min and :max ")->setParameter('min', $min)->setParameter('max', $max);
+        return $query->getResult();
+    }
+    public function findByEmail()
+    {
+
+        $req = $this->createQueryBuilder('a')
+        ->orderBy('a.email','ASC')
+        ->getQuery()
+        ->getResult(); 
+
+           return $req;  
+           }
+ 
 
     //    /**
     //     * @return Author[] Returns an array of Author objects

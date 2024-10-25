@@ -6,12 +6,23 @@
 		<title>Document</title>
 	</head>
 	<body>
+		<form action="{{path("recherche")}}" method="Post">
+			<label>min</label>
+			<input type="text" name="min">
+			<label>max</label>
+			<input type="text" name="max">
+			<input type="submit" value="recherche">
+
+
+		</form>
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
 					<th>ID</th>
 					<th>Username</th>
 					<th>Email</th>
+					<th>nb books</th>
+
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -21,6 +32,9 @@
 						<td>{{ author.id }}</td>
 						<td>{{ author.username }}</td>
 						<td>{{ author.email }}</td>
+						<td>{{ author.getNbBooks() }}</td>
+
+
 						<td>
 							<a href="{{ path('app_delete', { 'id': author.id }) }}" class="link-opacity-25-hover">Supprimer</a>
 
